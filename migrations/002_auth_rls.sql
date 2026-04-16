@@ -1,0 +1,4 @@
+-- No additional RLS policies needed beyond SCHEMA migration.
+-- All RLS policies are defined in the initial_schema migration.
+-- Auth helper functions get_my_account_id() and get_my_role() are SECURITY DEFINER.
+-- team_invites public access is handled server-side via service role client only.

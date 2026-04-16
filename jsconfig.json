@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "preserve",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false
+  },
+  "include": ["src/**/*", "next.config.js"],
+  "exclude": ["node_modules"]
+}

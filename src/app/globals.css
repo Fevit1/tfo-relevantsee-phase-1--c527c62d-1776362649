@@ -1,0 +1,596 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CSS Custom Properties — Design Tokens
+   ============================================================ */
+:root {
+  --color-bg-base: #030712;
+  --color-bg-surface: #111827;
+  --color-bg-elevated: #1f2937;
+  --color-border: #1f2937;
+  --color-border-subtle: #374151;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f46e5;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --sidebar-width: 240px;
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+  --radius-sm: 0.375rem;
+  --radius-base: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* ============================================================
+   Base Reset & Body
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+
+/* ============================================================
+   Focus Management — Visible for all interactive elements
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Remove focus ring on mouse-only interaction */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================================
+   Scrollbar Styling
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+/* ============================================================
+   Selection Styling
+   ============================================================ */
+::selection {
+  background: rgba(99, 102, 241, 0.4);
+  color: #f9fafb;
+}
+
+/* ============================================================
+   Typography Scale
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   Animation Keyframes
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes scoreReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: var(--progress-width); }
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes modalBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalContentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================================
+   Animation Utility Classes
+   ============================================================ */
+.animate-fade-in {
+  animation: fadeIn var(--transition-base) ease both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--transition-slow) ease both;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown var(--transition-base) ease both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft var(--transition-slow) ease both;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--transition-base) ease both;
+}
+
+.animate-toast-in {
+  animation: toastSlideIn 250ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-toast-out {
+  animation: toastSlideOut 200ms ease both;
+}
+
+.animate-modal-backdrop {
+  animation: modalBackdropIn 200ms ease both;
+}
+
+.animate-modal-content {
+  animation: modalContentIn 220ms cubic-bezier(0.34, 1.2, 0.64, 1) both;
+}
+
+.animate-score-reveal {
+  animation: scoreReveal 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #1f2937 25%,
+    #2d3748 50%,
+    #1f2937 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* ============================================================
+   Reduced Motion Overrides
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-shimmer {
+    animation: none;
+    background: #1f2937;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================
+   Component Utility Classes
+   ============================================================ */
+
+/* Stagger children animations */
+.stagger-children > * {
+  animation: fadeInUp var(--transition-slow) ease both;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(55, 65, 81, 0.6);
+}
+
+/* Interactive card hover */
+.card-interactive {
+  transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card-interactive:hover {
+  border-color: #374151;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-interactive:hover {
+    transform: none;
+  }
+}
+
+/* Button press effect */
+.btn-press {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-press:active {
+    transform: none;
+  }
+}
+
+/* Score ring animation */
+.score-ring-fill {
+  transition: stroke-dashoffset 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-ring-fill {
+    transition: none;
+  }
+}
+
+/* Sidebar nav item active state */
+.nav-item-active {
+  position: relative;
+}
+
+.nav-item-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--color-accent);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Status badge pulse for pending */
+.badge-pending-pulse {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-pending-pulse {
+    animation: none;
+  }
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1f2937 25%,
+    #27374a 50%,
+    #1f2937 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* Form input base styles */
+.input-base {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: var(--radius-base);
+  color: #f9fafb;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-base::placeholder {
+  color: #6b7280;
+}
+
+.input-base:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.input-base:hover:not(:focus) {
+  border-color: #4b5563;
+}
+
+.input-base.input-error {
+  border-color: #ef4444;
+}
+
+.input-base.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 4px;
+  background: #1f2937;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Truncate with tooltip */
+.truncate-tooltip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Status indicator dot */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot-draft { background: #6b7280; }
+.status-dot-pending { background: #f59e0b; }
+.status-dot-approved { background: #22c55e; }
+.status-dot-rejected { background: #ef4444; }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #374151, transparent);
+  margin: 1rem 0;
+}
+
+/* Tooltip base */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: var(--radius-sm);
+  color: #f9fafb;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: 50;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::after {
+  opacity: 1;
+}
+
+/* ============================================================
+   Mobile overlay for sidebar
+   ============================================================ */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 40;
+  backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.active {
+  display: block;
+  animation: fadeIn 200ms ease both;
+}
+
+/* ============================================================
+   Page transition wrapper
+   ============================================================ */
+.page-enter {
+  animation: fadeInUp 250ms ease both;
+}
+
+/* ============================================================
+   Print styles
+   ============================================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}

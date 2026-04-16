@@ -1,0 +1,158 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,jsx}',
+    './src/components/**/*.{js,jsx}',
+    './src/app/**/*.{js,jsx}',
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        gray: {
+          950: '#030712',
+          900: '#111827',
+          850: '#161e2e',
+          800: '#1f2937',
+          750: '#27374a',
+          700: '#374151',
+          600: '#4b5563',
+          500: '#6b7280',
+          400: '#9ca3af',
+          300: '#d1d5db',
+          200: '#e5e7eb',
+          100: '#f3f4f6',
+          50: '#f9fafb',
+        },
+        indigo: {
+          950: '#1e1b4b',
+          900: '#312e81',
+          800: '#3730a3',
+          700: '#4338ca',
+          600: '#4f46e5',
+          500: '#6366f1',
+          400: '#818cf8',
+          300: '#a5b4fc',
+          200: '#c7d2fe',
+          100: '#e0e7ff',
+          50: '#eef2ff',
+        },
+      },
+      fontFamily: {
+        sans: [
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          '"Noto Sans"',
+          'sans-serif',
+        ],
+        mono: [
+          'ui-monospace',
+          'SFMono-Regular',
+          '"SF Mono"',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          '"Liberation Mono"',
+          '"Courier New"',
+          'monospace',
+        ],
+      },
+      spacing: {
+        18: '4.5rem',
+        22: '5.5rem',
+        sidebar: '240px',
+      },
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+      },
+      boxShadow: {
+        'glow-indigo': '0 0 20px rgba(99, 102, 241, 0.3)',
+        'glow-green': '0 0 20px rgba(34, 197, 94, 0.3)',
+        'glow-red': '0 0 20px rgba(239, 68, 68, 0.3)',
+        'card': '0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3)',
+        'card-hover': '0 4px 24px rgba(0,0,0,0.5)',
+        'modal': '0 20px 60px rgba(0,0,0,0.7)',
+        'sidebar': '4px 0 24px rgba(0,0,0,0.3)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 200ms ease both',
+        'fade-in-up': 'fadeInUp 300ms ease both',
+        'scale-in': 'scaleIn 200ms ease both',
+        'shimmer': 'shimmer 1.6s infinite linear',
+        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+        'score-reveal': 'scoreReveal 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        'toast-in': 'toastSlideIn 250ms cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        'toast-out': 'toastSlideOut 200ms ease both',
+        'modal-backdrop': 'modalBackdropIn 200ms ease both',
+        'modal-content': 'modalContentIn 220ms cubic-bezier(0.34, 1.2, 0.64, 1) both',
+        'spin-slow': 'spin 1.5s linear infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        fadeInUp: {
+          from: { opacity: '0', transform: 'translateY(8px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          from: { opacity: '0', transform: 'scale(0.95)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        'pulse-soft': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.6' },
+        },
+        scoreReveal: {
+          from: { opacity: '0', transform: 'scale(0.8)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
+        toastSlideIn: {
+          from: { opacity: '0', transform: 'translateX(100%)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
+        toastSlideOut: {
+          from: { opacity: '1', transform: 'translateX(0)' },
+          to: { opacity: '0', transform: 'translateX(100%)' },
+        },
+        modalBackdropIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        modalContentIn: {
+          from: { opacity: '0', transform: 'scale(0.96) translateY(8px)' },
+          to: { opacity: '1', transform: 'scale(1) translateY(0)' },
+        },
+      },
+      transitionDuration: {
+        150: '150ms',
+        200: '200ms',
+        250: '250ms',
+        300: '300ms',
+      },
+      zIndex: {
+        sidebar: '30',
+        overlay: '40',
+        modal: '50',
+        toast: '60',
+        tooltip: '70',
+      },
+      screens: {
+        xs: '480px',
+      },
+    },
+  },
+  plugins: [],
+}
